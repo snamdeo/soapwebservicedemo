@@ -9,6 +9,6 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Apache CXF controller
-GET     /service/*path             	controllers.play.CxfController.handle(path)
+GET     /service/*path              org.apache.cxf.transport.play.CxfController.handle(path)
 
-POST    /service/*path              controllers.play.CxfController.handle(path)
+POST    /service/*path              org.apache.cxf.transport.play.CxfController.handle(path)

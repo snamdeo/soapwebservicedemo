@@ -7,7 +7,7 @@
  							http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
     <!-- Import Apache CXF configuration and Play! transport plugin. -->
-    <import resource="cxf.xml"/>
+    <import resource="classpath:cxf.xml"/>
 
     <!-- Define Hello World endpoint. It will be available at http://localhost:9000/service/hello -->
     <jaxws:endpoint name="helloWorld"
@@ -15,12 +15,6 @@
                     address="/service/hello"
                     implementor="services.hello.HelloWorldImpl"/>
                     
-                    <!-- Define Hello World endpoint. It will be available at http://localhost:9000/service/hello -->
-    <jaxws:endpoint name="myService"
-                    transportId="http://cxf.apache.org/transports/play"
-                    address="/service/myservice"
-                    implementor="services.hello.MyServiceImpl"/>
-                 
   	
 
 </beans>

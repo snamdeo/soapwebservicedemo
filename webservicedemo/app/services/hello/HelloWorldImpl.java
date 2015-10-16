@@ -1,8 +1,15 @@
 // HelloWorldImpl.java
 package services.hello;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebParam.Mode;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
+import javax.jws.soap.SOAPBinding.Style;
+import javax.jws.soap.SOAPBinding.Use;
 
 import play.Logger;
 import services.request.PersonList;
@@ -11,59 +18,39 @@ import services.request.PersonRequest;
 import services.response.PersonResponse;
 
 public class HelloWorldImpl implements HelloWorld {
-	
-	
-	// sayHi method takes four default request parameter of type string and return greeting message
+
     @Override
-    public String sayHi(String text,String text2,String text3,String text4) {
+    public String sayHiTest(String text,String text2,String text3,String text4) {
     	Logger.info("In sayHiTest method  : text - "+text+" ,text2 - "+text2+" text3 - "+text3+" ,text4 - "+text4);
-    	String msg=text+" "+text2+" ,"+text3+" ,"+text4;
-        return "Hello "+msg;
+        return "Hello " + text+" "+text2+" ,"+text3+" ,"+text4;
     }
     
-    
-    
-    //sayHiAgain method takes four user defined parameters of type string and return greeting message 
     @Override
     public String sayHiAgain(String text,String text2,String text3,String text4) {
     	Logger.info("In sayHiAgain method  : text - "+text+" ,text2 - "+text2+" text3 - "+text3+" ,text4 - "+text4);
-    	String res="Hello " + text+" "+text2+" ,"+text3+" ,"+text4;
-        return res;
+        return "Hello " + text+" "+text2+" ,"+text3+" ,"+text4;
     }
 
-    
-	//addPersonsList method takes list of person object as input and returns message of operation completion. 
 	@Override
-	public String addPersonsList(PersonList personList) {
+	public PersonResponse getPerson(PersonRequest personRequest) {
+		Logger.info("In getPerson method  : "+personRequest.getName());
+		PersonResponse personResponse=new PersonResponse();
+		personResponse.setName(personRequest.getName());
+		personResponse.setSurname(personRequest.getSurname());
+		personResponse.setLocation(personRequest.getLocation());
+		return personResponse;
+	}
+	
+	@Override
+	public String personsList(PersonList personList) {
 		Logger.info("In personList method  : "+personList.getPersonList().size());
-		for (PersonRequest pr : personList.getPersonList()) {
-			Logger.info("Person name : "+pr.getName());
-			Logger.info("Person surname : "+pr.getSurname());
-			Logger.info("Person location : "+pr.getLocation()+"\n\n");
-		}
+		/*PersonResponse personResponse=new PersonResponse();
+		personResponse.setName(person.getName());
+		personResponse.setSurname(person.getSurname());
+		personResponse.setLocation(person.getLocation());*/
 		return "person list added";
 	}
 	
-	//getPersonsList method takes list of person object and returns list of person object.
-	@Override
-	public PersonList getPersonsList(PersonList personList) {
-		Logger.info("In personsListDisplay method  : "+personList.getPersonList().size());
-		List<PersonRequest> pl=personList.getPersonList();
-    	PersonRequest pr1=new PersonRequest();
-    	pr1.setName("Sakhshi");
-    	pr1.setSurname("Jain");
-    	pr1.setLocation("Servicesource");
-    	pl.add(pr1);
-		for (PersonRequest pr : personList.getPersonList()) {
-			Logger.info("Person name : "+pr.getName());
-			Logger.info("Person surname : "+pr.getSurname());
-			Logger.info("Person location : "+pr.getLocation()+"\n\n");
-		}
-		return personList;
-	}
-	
-	
-	// addPerson method takes person object as input and returns operation completion message.
 	@Override
 	public String addPerson(PersonRequest person) {
 		Logger.info("In getPerson method  : "+person.getName());
@@ -71,7 +58,14 @@ public class HelloWorldImpl implements HelloWorld {
 		personResponse.setName(person.getName());
 		personResponse.setSurname(person.getSurname());
 		personResponse.setLocation(person.getLocation());
-		return "person added";
+		return "Person added";
 	}
 
+	@Override
+	public PersonResponse retrivePerson(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+	
 }
